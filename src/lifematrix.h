@@ -20,8 +20,8 @@ public:
     // Заново создаем массив (изменяем размер, только всё с нуля)
     void reallocate(size_t horizontalCount, size_t verticalCount);
 
-    // Перегрузки операторов
-    bool operator ==(const LifeMatrix &mtrx);
+    inline size_t getCountRows() const { return countRow; }
+    inline size_t getCountColumns() const { return countCol; }
 
 private:
     // Матрица, собственно
@@ -41,5 +41,7 @@ signals:
 
 public slots:
 };
+
+bool operator ==(const LifeMatrix &left, const LifeMatrix &right);
 
 #endif // LIFEMATRIX_H

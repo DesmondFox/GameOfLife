@@ -43,17 +43,6 @@ void LifeMatrix::reallocate(size_t horizontalCount, size_t verticalCount)
 
 }
 
-bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
-{
-    // Перегрузка оператора сравнения
-
-    if (mtrx.countCol == this->countCol)
-        return true;
-
-
-    return false;
-}
-
 void LifeMatrix::fillZero()
 {
     // Заполнение матрицы нулями
@@ -77,4 +66,9 @@ void LifeMatrix::deleteMatrix()
     m_matrix = nullptr;
 
     qDebug() << "Notice:\t Deleting a matrix";
+}
+
+bool operator ==(const LifeMatrix &left, const LifeMatrix &right)
+{
+
 }
