@@ -8,7 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     qDebug() << "start";
-//    LifeMatrix *mt = new LifeMatrix(2000, 5000, this);
+    LifeMatrix *mt = new LifeMatrix(this);
+    LifeMatrix *mx = new LifeMatrix(this);
+    mt->allocate(50, 21);
+    mx->allocate(49, 50);
+
+    if (mt == mx)
+        qDebug() << "ololo";
 
 }
 

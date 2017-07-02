@@ -16,25 +16,26 @@ public:
     ~LifeMatrix();
 
     // Выделение памяти под массив
-    void allocate(size_t horizontalCount, size_t verticalCount);
+    void allocate(size_t rowCount, size_t columnCount);
     // Заново создаем массив (изменяем размер, только всё с нуля)
     void reallocate(size_t horizontalCount, size_t verticalCount);
 
     // Перегрузки операторов
-    friend bool operator ==(const LifeMatrix &left, const LifeMatrix &right);
+    bool operator ==(const LifeMatrix &mtrx);
 
 private:
     // Матрица, собственно
     bool    **m_matrix;
 
     // Текущее количество клеток
-    size_t  sizeHor;
-    size_t  sizeVer;
+    size_t  countCol;
+    size_t  countRow;
 
     // Заполнение массива нулями / очистка
     void fillZero();
     // Удаление массива
     void deleteMatrix();
+
 
 signals:
 

@@ -2,38 +2,38 @@
 
 LifeMatrix::LifeMatrix(QObject *parent) : QObject(parent)
 {
-
+    m_matrix = nullptr;
 }
 
 LifeMatrix::~LifeMatrix()
 {
-    qDebug() << "Deleted";
+    deleteMatrix();
 }
 
-void LifeMatrix::allocate(size_t horizontalCount, size_t verticalCount)
+void LifeMatrix::allocate(size_t rowCount, size_t columnCount)
 {
     // Выделение памяти под массив
 
     // Выкидываем предупреждение, если меньше количество 0
-    Q_ASSERT(horizontalCount > 0 || verticalCount > 0);
+    Q_ASSERT(columnCount > 0 || rowCount > 0);
 
-    if (m_matrix == nullptr)
+    if (m_matrix != nullptr)
         return;
-    m_matrix        = new bool*[verticalCount];
-    for (size_t i = 0; i < horizontalCount; i++)
-        m_matrix[i] = new bool[horizontalCount];
+    m_matrix        = new bool*[rowCount];
+    for (size_t i = 0; i < rowCount; i++)
+        m_matrix[i] = new bool[columnCount];
 
-    sizeHor = horizontalCount;
-    sizeVer = verticalCount;
+    countCol = columnCount;
+    countRow = rowCount;
 
     fillZero();
 
-    qDebug() << "Notice:\n Created Matrix [" << sizeVer << "][" << sizeHor << "]";
+    qDebug() << "Notice:\t Created Matrix [" << countRow << "][" << countCol << "]";
 }
 
 void LifeMatrix::reallocate(size_t horizontalCount, size_t verticalCount)
 {
-    qDebug() << "Notice:\n Reallocating memory for a Matrix to ["
+    qDebug() << "Notice:\t Reallocating memory for a Matrix to ["
              << verticalCount << "]["
              << horizontalCount << "]";
 
@@ -47,6 +47,9 @@ bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
 {
     // Перегрузка оператора сравнения
 
+    if (mtrx.countCol == this->countCol)
+        return true;
+
 
     return false;
 }
@@ -56,8 +59,8 @@ void LifeMatrix::fillZero()
     // Заполнение матрицы нулями
     if (m_matrix == nullptr)
         return;
-    for (size_t i = 0; i < sizeVer; i++)
-        for (size_t j = 0; j < sizeVer; j++)
+    for (size_t i = 0; i < countRow; i++)
+        for (size_t j = 0; j < countCol; j++)
             m_matrix[i][j]  = false;
 }
 
@@ -66,7 +69,7 @@ void LifeMatrix::deleteMatrix()
     // Удаление массива и освобождение памяти
     if (m_matrix == nullptr)
         return;
-    for (size_t i = 0; i < sizeVer; i++)
+    for (size_t i = 0; i < countRow; i++)
         delete []m_matrix[i];
     delete []m_matrix;
 
