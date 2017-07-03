@@ -46,7 +46,6 @@ void LifeMatrix::reallocate(size_t horizontalCount, size_t verticalCount)
 bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
 {
     // Перегрузка оператора сравнения
-    // Когда сравниваются явно
 
     // Проверка на размеры
     Q_ASSERT(this->countCol == mtrx.countCol);
@@ -57,6 +56,28 @@ bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
             if (this->m_matrix[i][j] != mtrx.m_matrix[i][j])
                 return false;
     return true;
+}
+
+bool LifeMatrix::getElement(size_t row, size_t col)
+{
+    // Получение элемента массива
+
+    Q_CHECK_PTR(m_matrix);      // Проверка мастрицы на существование
+    Q_ASSERT(row <= countRow);
+    Q_ASSERT(col <= countCol);
+
+    return m_matrix[row][col];
+}
+
+void LifeMatrix::setElement(size_t row, size_t col, bool value)
+{
+    // Задать элемент массива
+
+    Q_CHECK_PTR(m_matrix);      // Проверка мастрицы на существование
+    Q_ASSERT(row <= countRow);
+    Q_ASSERT(col <= countCol);
+
+    m_matrix[row][col] = value;
 }
 
 void LifeMatrix::fillZero()

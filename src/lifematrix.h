@@ -25,6 +25,9 @@ public:
 
     bool operator ==(const LifeMatrix &mtrx);
 
+    bool getElement(size_t row, size_t col);
+    void setElement(size_t row, size_t col, bool value);
+
 private:
     // Матрица, собственно
     bool    **m_matrix;
