@@ -23,6 +23,8 @@ public:
     inline size_t getCountRows() const { return countRow; }
     inline size_t getCountColumns() const { return countCol; }
 
+    bool operator ==(const LifeMatrix &mtrx);
+
 private:
     // Матрица, собственно
     bool    **m_matrix;
@@ -41,7 +43,5 @@ signals:
 
 public slots:
 };
-
-bool operator ==(const LifeMatrix &left, const LifeMatrix &right);
 
 #endif // LIFEMATRIX_H

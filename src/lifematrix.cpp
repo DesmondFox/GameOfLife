@@ -43,6 +43,22 @@ void LifeMatrix::reallocate(size_t horizontalCount, size_t verticalCount)
 
 }
 
+bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
+{
+    // Перегрузка оператора сравнения
+    // Когда сравниваются явно
+
+    // Проверка на размеры
+    Q_ASSERT(this->countCol == mtrx.countCol);
+    Q_ASSERT(this->countRow == mtrx.countRow);
+
+    for (size_t i = 0; i < this->countRow; i++)
+        for (size_t j = 0; j < this->countCol; j++)
+            if (this->m_matrix[i][j] != mtrx.m_matrix[i][j])
+                return false;
+    return true;
+}
+
 void LifeMatrix::fillZero()
 {
     // Заполнение матрицы нулями
@@ -68,7 +84,3 @@ void LifeMatrix::deleteMatrix()
     qDebug() << "Notice:\t Deleting a matrix";
 }
 
-bool operator ==(const LifeMatrix &left, const LifeMatrix &right)
-{
-
-}
