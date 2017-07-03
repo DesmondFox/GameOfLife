@@ -14,9 +14,7 @@ void LifeMatrix::allocate(size_t rowCount, size_t columnCount)
 {
     // Выделение памяти под массив
 
-    // Выкидываем предупреждение, если меньше количество 0
-    Q_ASSERT(columnCount > 0 || rowCount > 0);
-
+    // Инициализируем массив
     if (m_matrix != nullptr)
         return;
     m_matrix        = new bool*[rowCount];
@@ -48,6 +46,7 @@ bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
     // Перегрузка оператора сравнения
 
     // Проверка на размеры
+    Q_CHECK_PTR(m_matrix);
     Q_ASSERT(this->countCol == mtrx.countCol);
     Q_ASSERT(this->countRow == mtrx.countRow);
 
