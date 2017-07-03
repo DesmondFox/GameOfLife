@@ -24,6 +24,7 @@ void LifeMatrix::allocate(size_t rowCount, size_t columnCount)
     countCol = columnCount;
     countRow = rowCount;
 
+    // Заполнение нулями
     fillZero();
 
     qDebug() << "Notice:\t Created Matrix [" << countRow << "][" << countCol << "]";
@@ -61,9 +62,9 @@ bool LifeMatrix::getElement(size_t row, size_t col)
 {
     // Получение элемента массива
 
-    Q_CHECK_PTR(m_matrix);      // Проверка мастрицы на существование
-    Q_ASSERT(row <= countRow);
-    Q_ASSERT(col <= countCol);
+    Q_CHECK_PTR(m_matrix);      // Проверка матрицы на существование
+    Q_ASSERT(row < countRow);
+    Q_ASSERT(col < countCol);
 
     return m_matrix[row][col];
 }
@@ -73,8 +74,8 @@ void LifeMatrix::setElement(size_t row, size_t col, bool value)
     // Задать элемент массива
 
     Q_CHECK_PTR(m_matrix);      // Проверка мастрицы на существование
-    Q_ASSERT(row <= countRow);
-    Q_ASSERT(col <= countCol);
+    Q_ASSERT(row < countRow);
+    Q_ASSERT(col < countCol);
 
     m_matrix[row][col] = value;
 }
