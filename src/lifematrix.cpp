@@ -1,6 +1,6 @@
 #include "lifematrix.h"
 
-LifeMatrix::LifeMatrix(QObject *parent) : QObject(parent)
+LifeMatrix::LifeMatrix()
 {
     m_matrix = nullptr;
 }

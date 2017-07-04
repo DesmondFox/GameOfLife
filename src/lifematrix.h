@@ -5,14 +5,12 @@
 #ifndef LIFEMATRIX_H
 #define LIFEMATRIX_H
 
-#include <QObject>
 #include <QDebug>
 
-class LifeMatrix : public QObject
+class LifeMatrix
 {
-    Q_OBJECT
 public:
-    explicit LifeMatrix(QObject *parent = nullptr);
+    explicit LifeMatrix();
     ~LifeMatrix();
 
     // Выделение памяти под массив
