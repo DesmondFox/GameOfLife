@@ -24,9 +24,11 @@ public:
     inline size_t getCountColumns() const { return countCol; }
 
     bool operator ==(const LifeMatrix &mtrx);
-
     bool getElement(size_t row, size_t col);
     void setElement(size_t row, size_t col, bool value);
+
+    // Получить количество соседей у клетки
+    short getNeighbours(size_t row, size_t col);
 
 private:
     // Матрица, собственно

@@ -80,6 +80,38 @@ void LifeMatrix::setElement(size_t row, size_t col, bool value)
     m_matrix[row][col] = value;
 }
 
+short LifeMatrix::getNeighbours(size_t row, size_t col)
+{
+    // Получение количества соседей
+    Q_ASSERT(row < countRow);
+    Q_ASSERT(col < countCol);
+
+    short ng = 0;
+
+    // Подсчитаем верхние и нижние грани массива
+    // т.к. поле будет повторяться
+    short   rowL    = (row == 0) ? countRow - 1 : row - 1,
+            rowH    = (row == countRow - 1) ? 0 : row + 1,
+            colL    = (col == 0) ? countCol - 1 : col - 1,
+            colH    = (col == countCol - 1) ? 0 : col + 1;
+
+    // Верх
+    ng  += m_matrix[rowL][colL];
+    ng  += m_matrix[rowL][col];
+    ng  += m_matrix[rowL][colH];
+
+    // Середина
+    ng  += m_matrix[row][colL];
+    ng  += m_matrix[row][colH];
+
+    // Низ
+    ng  += m_matrix[rowH][colL];
+    ng  += m_matrix[rowH][col];
+    ng  += m_matrix[rowH][colH];
+
+    return ng;
+}
+
 void LifeMatrix::fillZero()
 {
     // Заполнение матрицы нулями
