@@ -28,6 +28,9 @@ public:
     // Получить количество соседей у клетки
     short getNeighbours(size_t row, size_t col);
 
+    // Получить количество элементов с true
+    unsigned int countFilled();
+
 private:
     // Матрица, собственно
     bool    **m_matrix;

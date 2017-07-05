@@ -112,6 +112,19 @@ short LifeMatrix::getNeighbours(size_t row, size_t col)
     return ng;
 }
 
+unsigned int LifeMatrix::countFilled()
+{
+    // Получение количества ненулевых значений в массиве
+    unsigned int count = 0;
+
+    for (size_t i = 0; i < countRow; i++)
+        for (size_t j = 0; j < countCol; j++)
+            if (m_matrix[i][j] == true)
+                count++;
+
+    return count;
+}
+
 void LifeMatrix::fillZero()
 {
     // Заполнение матрицы нулями
