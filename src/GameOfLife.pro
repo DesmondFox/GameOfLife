@@ -29,14 +29,16 @@ SOURCES += \
     lifecell.cpp \
     lifematrix.cpp \
     processing.cpp \
-    lifescene.cpp
+    lifescene.cpp \
+    lifeview.cpp
 
 HEADERS += \
         mainwindow.h \
     lifecell.h \
     lifematrix.h \
     processing.h \
-    lifescene.h
+    lifescene.h \
+    lifeview.h
 
 FORMS += \
         mainwindow.ui
