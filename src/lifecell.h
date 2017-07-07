@@ -6,6 +6,8 @@
 #include <QMouseEvent>
 #include <QBrush>
 #include <QRectF>
+#include <QDebug>
+#include <QtEvents>
 
 // Состояние клетки
 enum CellStatus
@@ -21,7 +23,7 @@ public:
     explicit LifeCell(const QRectF &rect, QGraphicsItem *parent = nullptr);
 
     // Изменение состояния клетки
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
     // Получение текущего состояния клетки
     CellStatus getStatus() const;

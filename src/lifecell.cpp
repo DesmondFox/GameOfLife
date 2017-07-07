@@ -5,12 +5,15 @@ LifeCell::LifeCell(const QRectF &rect, QGraphicsItem *parent)
 {
     // При запуске клетка изначально мертвая
     changeStatus(C_DIED);
+
+
 }
 
 void LifeCell::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     // Если клетка живая была до нажатия, то перекрашиваем и делаем её мертвой
     changeStatus((currentStatus == C_ALIVE) ? C_DIED : C_ALIVE);
+    QGraphicsRectItem::mousePressEvent(event);
 }
 
 CellStatus LifeCell::getStatus() const
