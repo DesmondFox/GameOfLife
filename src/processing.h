@@ -15,14 +15,14 @@ class Processing : public QObject
 {
     Q_OBJECT
 public:
-    explicit Processing(QObject *parent = nullptr);
+    explicit Processing(ushort width, ushort height, QObject *parent = nullptr);
 
     // Установка задержки таймера
-    void setTimerDelay(unsigned short msec = 80);
+    void setTimerDelay(unsigned short msec = 100);
 
     // Получение сцены (для GraphicsView)
-    LifeScene* getScene() { return &m_scene; }
-
+    //! используется только для задания сцены QGraphicsView и нигде больше!
+    LifeScene* getScene() const { return m_scene; }
 
 private:
     // Матрицы текущего и следующего поколения
@@ -30,12 +30,18 @@ private:
     LifeMatrix m_nextGeneration;
 
     // Сцена
-    LifeScene m_scene;
+    LifeScene *m_scene;
 
+    // Таймер
     QTimer m_timer;
+
+
 signals:
 
 public slots:
+//    void slotStart();
+//    void slotStop();
+
 };
 
 #endif // PROCESSING_H

@@ -1,6 +1,7 @@
 #include "processing.h"
 
 Processing::Processing(QObject *parent) : QObject(parent)
+Processing::Processing(ushort width, ushort height, QObject *parent) : QObject(parent)
 {
 
 }
