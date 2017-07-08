@@ -83,3 +83,18 @@ void LifeScene::draw()
 
 
 }
+
+void LifeScene::drawField(uint row, uint col, short cellW)
+{
+    // Зададим размеры поля
+    this->setField(row, col, cellW);
+
+    // Отрисуем поле
+    draw();
+    // TODO: написать метод рисовки чистого поля
+}
+
+void LifeScene::drawMatrix(const LifeMatrix &mtrx)
+{
+    // TODO: написать метод отрисовки матрицы
+}

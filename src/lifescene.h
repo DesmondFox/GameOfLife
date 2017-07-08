@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "lifecell.h"
+#include "lifematrix.h"
 
 class LifeScene : public QGraphicsScene
 {
@@ -21,7 +22,14 @@ public:
     void    setField(size_t row, size_t col, unsigned short cellWidth);
     void    setCellSize(ushort width);
 
+    // тестовая функция для отладки
     void    draw();
+
+    // Фунцкция для рисования чистого поля
+    void    drawField(uint row, uint col, short cellW);
+
+    // Метод отрисовки заданной матрицы
+    void    drawMatrix(const LifeMatrix &mtrx);
 
 private:
     // максимальный размер клетки
