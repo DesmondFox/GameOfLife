@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtEvents>
 
+#include "lifeview.h"
 #include "lifematrix.h"
-
+#include "processing.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,8 +20,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void showEvent(QShowEvent *event);
+
 private:
     Ui::MainWindow *ui;
+    Processing  *m_proc;
 };
 
 #endif // MAINWINDOW_H
