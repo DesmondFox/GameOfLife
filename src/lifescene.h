@@ -16,28 +16,31 @@ class LifeScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit LifeScene(ushort width, ushort height, QObject *parent = nullptr);
+    explicit LifeScene(ushort width, ushort height, short cellWidth, QObject *parent = nullptr);
 
     // Загрузка размеров поля и клеток
-    void    setField(size_t row, size_t col, unsigned short cellWidth);
     void    setCellSize(ushort width);
 
     // тестовая функция для отладки
-    void    draw();
-
-    // Фунцкция для рисования чистого поля
-    void    drawField(uint row, uint col, short cellW);
+    void    drawCleanField();
 
     // Метод отрисовки заданной матрицы
     void    drawMatrix(const LifeMatrix &mtrx);
+
+    // изменение размеров сцены (по колич клеток)
+    void    resizeField(uint _row, uint _col, ushort _cellw);
+
+    // Геттеры/сеттеры
+    inline uint getRowCount() const { return rowCount; }
+    inline uint getColCount() const { return colCount; }
 
 private:
     // максимальный размер клетки
     static const ushort MaxSizeOfCell = 100;
 
     // Количество ячеек (ряды/столбцы)
-    size_t rowCount;    // Количество рядов из клеток
-    size_t colCount;    // Количество столбцов из клеток
+    ushort rowCount;    // Количество рядов из клеток
+    ushort colCount;    // Количество столбцов из клеток
     short  cellSize;    // Длинна стороны клетки
 
     // Размер сцены
@@ -47,6 +50,10 @@ private:
     // Рисовка клеток
     QGraphicsItemGroup *m_itemGroup;    // группа клеток (для удобства изменений)
 
+    // Задание количества клеток
+    void    setField(uint row, uint col);
+    // Просчет количества клеток
+    void    resolveCells();
 signals:
 
 public slots:
