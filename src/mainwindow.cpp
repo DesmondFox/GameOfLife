@@ -22,7 +22,7 @@ void MainWindow::showEvent(QShowEvent *event)
     // Действия уже при загрузке окна
     // Узнать значение вьюпорта и закинуть в класс обработки
     m_proc  = new Processing(ui->graphicsView->viewport()->width(),
-                             ui->graphicsView->viewport()->height(), this);
+                             ui->graphicsView->viewport()->height(), 10, this);
     ui->graphicsView->setScene(m_proc->getScene());
     ui->graphicsView->setMouseTracking(true);
 }

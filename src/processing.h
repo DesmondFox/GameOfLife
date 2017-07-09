@@ -15,7 +15,7 @@ class Processing : public QObject
 {
     Q_OBJECT
 public:
-    explicit Processing(ushort width, ushort height, QObject *parent = nullptr);
+    explicit Processing(ushort width, ushort height, short cellWidth, QObject *parent = nullptr);
 
     // Установка задержки таймера
     void setTimerDelay(unsigned short msec = 100);
