@@ -7,7 +7,8 @@
 #include <QBrush>
 #include <QRectF>
 #include <QDebug>
-#include <QtEvents>
+#include <QGraphicsSceneMouseEvent>
+#include <QPen>
 
 // Состояние клетки
 enum CellStatus
