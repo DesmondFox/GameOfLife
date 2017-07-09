@@ -1,15 +1,24 @@
 #include "lifescene.h"
 
 
-LifeScene::LifeScene(ushort width, ushort height, QObject *parent) : QGraphicsScene(parent)
+LifeScene::LifeScene(ushort width, ushort height, short cellWidth, QObject *parent) : QGraphicsScene(parent)
 {
     // Установка начальных значений
+
+    Q_ASSERT(width > 0 && height > 0);
+
+    // Обнулим переменные
+    cellSize    = 0;
+    colCount    = 0;
+    rowCount    = 0;
 
     // Интересно то, что надо немного уменьшить размер поля, т.к. вылезает полоса прокрутки.
     // Костыль или нет - хз
     sceneHeight = height-3;
     sceneWidth  = width-3;
-    // TODO: решить проблему с полосой прокрутки
+    // Зададим размеры клетки
+    setCellSize(cellWidth);
+    // FIXME: решить проблему с полосой прокрутки
 
     qDebug() << "Notice:\t Scene: Scene created with size [" << sceneWidth << " x " << sceneHeight << "]";
 
@@ -20,9 +29,12 @@ LifeScene::LifeScene(ushort width, ushort height, QObject *parent) : QGraphicsSc
     this->addRect(0.0, 0.0, (qreal) sceneWidth, (qreal) sceneHeight,
                   QPen(QColor(Qt::gray)), QBrush(Qt::gray));
 
+
+    // Посчитаем поле
+    resolveCells();
 }
 
-void LifeScene::setField(size_t row, size_t col, unsigned short cellWidth)
+void LifeScene::setField(uint row, uint col)
 {
     qDebug() << "Notice:\t Scene: Changing a field size as [" << row << " x " << col << "] " << cellWidth << "px";
 
@@ -31,22 +43,31 @@ void LifeScene::setField(size_t row, size_t col, unsigned short cellWidth)
 
     this->rowCount  = row;
     this->colCount  = col;
-    this->cellSize  = cellWidth;
+}
+
+void LifeScene::resolveCells()
+{
+    // Просчет количества клеток
+
+    rowCount = sceneHeight / cellSize;
+    colCount = sceneWidth  / cellSize;
+
+    qDebug() << "Notice:\t Scene: Row count / col count: " << rowCount << " / " << colCount;
 }
 
 void LifeScene::setCellSize(ushort width)
 {
     // Проверим, подходит ли максимальному размеру
     Q_ASSERT(width <= MaxSizeOfCell);
+    Q_ASSERT(width > 0);
 
     cellSize    = width;
-
 }
 
-void LifeScene::draw()
+void LifeScene::drawCleanField()
 {
     //
-    // Рисовать клетки и добавлять в группу элементов
+    // Рисовать чистое поле
     //
 
     const ushort space = 1;
@@ -84,17 +105,18 @@ void LifeScene::draw()
 
 }
 
-void LifeScene::drawField(uint row, uint col, short cellW)
-{
-    // Зададим размеры поля
-    this->setField(row, col, cellW);
-
-    // Отрисуем поле
-    draw();
-    // TODO: написать метод рисовки чистого поля
-}
-
 void LifeScene::drawMatrix(const LifeMatrix &mtrx)
 {
     // TODO: написать метод отрисовки матрицы
+}
+
+void LifeScene::resizeField(uint _row, uint _col, ushort _cellw)
+{
+    // Изменение поля(количество полей/столбцов)
+
+    if (_row == rowCount && _col == colCount)
+        return;
+
+    this->setCellSize(_cellw);
+    this->setField(_row, _col);
 }
