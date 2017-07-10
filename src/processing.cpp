@@ -12,6 +12,9 @@ Processing::Processing(ushort width, ushort height, short cellWidth, QObject *pa
     m_nextGeneration.allocate(m_scene->getRowCount(),
                               m_scene->getColCount());
 
+Processing::~Processing()
+{
+    delete m_scene;
 }
 
 void Processing::setTimerDelay(unsigned short msec)
