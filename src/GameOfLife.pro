@@ -30,8 +30,8 @@ SOURCES += \
     processing.cpp \
     lifescene.cpp \
     lifeview.cpp \
-    graphicsitemmatrix.cpp \
-    lifematrix.cpp
+    lifematrix.cpp \
+    graphicsitemmatrix.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,9 +39,9 @@ HEADERS += \
     processing.h \
     lifescene.h \
     lifeview.h \
-    graphicsitemmatrix.h \
     basematrix.h \
-    lifematrix.h
+    lifematrix.h \
+    graphicsitemmatrix.h
 
 FORMS += \
         mainwindow.ui

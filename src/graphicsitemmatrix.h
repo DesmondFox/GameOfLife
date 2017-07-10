@@ -5,14 +5,19 @@
 #ifndef GRAPHICSITEMMATRIX_H
 #define GRAPHICSITEMMATRIX_H
 
-#include <QGraphicsItem>
+#include "lifecell.h"
 #include "basematrix.h"
 
-//class GraphicsItemMatrix : public BaseMatrix<QGraphicsItem>
-//{
-//public:
-//private:
+typedef BaseMatrix<LifeCell *> Base;
 
-//};
+class GraphicsItemMatrix
+        : public Base
+{
+public:
+    GraphicsItemMatrix();
+    ~GraphicsItemMatrix();
+//    void allocMemory();
+
+};
 
 #endif // GRAPHICSITEMMATRIX_H

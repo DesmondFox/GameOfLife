@@ -1,23 +1,28 @@
-//#include "graphicsitemmatrix.h"
+#include "graphicsitemmatrix.h"
 
-//GraphicsItemMatrix::GraphicsItemMatrix()
+GraphicsItemMatrix::GraphicsItemMatrix()
+    : Base()
+{
+
+}
+
+GraphicsItemMatrix::~GraphicsItemMatrix()
+{
+}
+
+//void GraphicsItemMatrix::allocMemory()
 //{
-//    m_matrix    = nullptr;
+//    // Выделение памяти под элементы
+//    try
+//    {
+//        for (size_t i = 0; i < countRow; i++)
+//            for (size_t j = 0; j < countCol; j++)
+//                m_matrix[i][j]  = new LifeCell(QRectF());
+//        qDebug() << "Notice:\t Memory for elements has been allocated";
+//    }
+//    catch(...)
+//    {
+//        qDebug() << "Critical:\t Allocation error";
+//    }
 //}
 
-//void GraphicsItemMatrix::allocate(size_t row, size_t col)
-//{
-//    Q_ASSERT(row > 0 && col > 0);
-
-//    if (m_matrix != nullptr)
-//        return;
-
-//    m_matrix = new QGraphicsItem*[row];
-//    for (size_t i = 0; i < row; i++)
-//        m_matrix[i] = new QGraphicsItem[col];
-
-//    _rows = row;
-//    _cols = col;
-
-//    qDebug() << "Notice:\t Graphics Item Matrix has been created [" << row << "x" << col << "]";
-//}

@@ -15,12 +15,14 @@ class BaseMatrix
 public:
     explicit BaseMatrix()
     {
-
+        m_matrix = nullptr;
+        countCol = 0;
+        countRow = 0;
     }
 
-    ~BaseMatrix()
+    virtual ~BaseMatrix()
     {
-
+        deleteMatrix();
     }
 
     // Выделение памяти под массив
@@ -42,15 +44,15 @@ public:
     }
 
     // Заново создаем массив (изменяем размер, только всё с нуля)
-    void reallocate(size_t horizontalCount, size_t verticalCount)
+    void reallocate(size_t rowCount, size_t columnCount)
     {
         qDebug() << "Notice:\t Reallocating memory for a Matrix to ["
-                 << verticalCount << "]["
-                 << horizontalCount << "]";
+                 << rowCount << "]["
+                 << columnCount << "]";
 
         // Переопределение матрицы
         deleteMatrix();
-        allocate(horizontalCount, verticalCount);
+        allocate(rowCount, columnCount);
     }
 
     inline size_t getCountRows() const { return countRow; }
@@ -66,7 +68,6 @@ public:
 
         return m_matrix[row][col];
     }
-
     void setElement(size_t row, size_t col, T value)
     {
         // Задать элемент массива
@@ -78,8 +79,7 @@ public:
         m_matrix[row][col] = value;
     }
 
-
-public:
+protected:
     // Матрица, собственно
     T    **m_matrix;
 
@@ -87,13 +87,10 @@ public:
     size_t  countCol;
     size_t  countRow;
 
-
     // Удаление массива
-    void deleteMatrix()
+    virtual void deleteMatrix()
     {
         // Удаление массива и освобождение памяти
-        if (m_matrix == nullptr)
-            return;
         for (size_t i = 0; i < countRow; i++)
             delete []m_matrix[i];
         delete []m_matrix;
@@ -103,7 +100,6 @@ public:
 
         qDebug() << "Notice:\t Deleting a matrix";
     }
-
 };
 
 #endif // BASEMATRIX_H
