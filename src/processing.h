@@ -8,14 +8,15 @@
 #include <QObject>
 #include <QTimer>
 
-#include "lifematrix.h"
 #include "lifescene.h"
+#include "lifematrix.h"
 
 class Processing : public QObject
 {
     Q_OBJECT
 public:
     explicit Processing(ushort width, ushort height, short cellWidth, QObject *parent = nullptr);
+    ~Processing();
 
     // Установка задержки таймера
     void setTimerDelay(unsigned short msec = 100);

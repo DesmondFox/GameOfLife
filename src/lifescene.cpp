@@ -59,7 +59,9 @@ void LifeScene::draw()
             rect.setX(x);               rect.setY(y);
             rect.setWidth(cellSize);    rect.setHeight(cellSize);
 
-            //itmMatrix.setElement(i, j, new LifeCell(rect));
+            // Добавление элемента на сцену
+            itmMatrix.setElement(i, j, new LifeCell(rect));
+            this->addItem(itmMatrix.getElement(i, j));
         }
     }
 
