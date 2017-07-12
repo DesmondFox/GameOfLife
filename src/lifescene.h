@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "graphicsitemmatrix.h"
+#include "lifematrix.h"
 
 class LifeScene : public QGraphicsScene
 {
@@ -24,6 +25,14 @@ public:
 
     // Перерисовка сцены. Клетки все ЧИСТЫЕ
     void    draw();
+
+    // Отрисовка матрицы
+    void    drawMatrix(const LifeMatrix &mtrx);
+    void    fromSceneToMtrx(LifeMatrix &mtrx);
+
+    inline ushort  getRows() const { return rowCount; }
+    inline ushort  getCols() const { return colCount; }
+
 private:
     // Размеры сцены
     ushort  sceneWidth;
@@ -37,6 +46,9 @@ private:
 
     // Матрица графических элементов
     GraphicsItemMatrix itmMatrix;
+
+    // Вычисление количества клеток при заданном размере сцены
+    void    solveCellCount();
 
 signals:
 

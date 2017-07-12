@@ -14,6 +14,8 @@ LifeScene::LifeScene(ushort width, ushort height, ushort cellWidth, QObject *par
     // Покрасим сцену в серый цвет
     this->setBackgroundBrush(QBrush(Qt::gray));
 
+    // Сразу вычислим строки/столбцы
+    this->solveCellCount();
 }
 
 LifeScene::~LifeScene()
@@ -65,5 +67,51 @@ void LifeScene::draw()
         }
     }
 
+}
+
+void LifeScene::drawMatrix(const LifeMatrix &mtrx)
+{
+    // TODO: Отрисовка заданной матрицы
+
+    Q_ASSERT(mtrx.getCountRows()    == this->itmMatrix.getCountRows());
+    Q_ASSERT(mtrx.getCountColumns() == this->itmMatrix.getCountColumns());
+
+    size_t  rows = mtrx.getCountRows(),
+            cols = mtrx.getCountColumns();
+
+    for (size_t i = 0; i < rows; i++)
+        for (size_t j = 0; j < cols; j++)
+        {
+            bool currStt    = mtrx.getElement(i, j);
+            CellStatus stt  = (currStt) ? C_ALIVE : C_DIED;
+            this->itmMatrix.getElement(i, j)->changeStatus(stt);
+        }
+}
+
+void LifeScene::fromSceneToMtrx(LifeMatrix &mtrx)
+{
+    // Метод для извлечения состояния клеток з сцены в матрицу
+    Q_ASSERT(mtrx.getCountRows()    == this->itmMatrix.getCountRows());
+    Q_ASSERT(mtrx.getCountColumns() == this->itmMatrix.getCountColumns());
+
+    size_t  rows = mtrx.getCountRows(),
+            cols = mtrx.getCountColumns();
+
+    for (size_t i = 0; i < rows; i++)
+        for (size_t j = 0; j < cols; j++)
+        {
+            CellStatus currStt = this->itmMatrix.getElement(i, j)->getStatus();
+            bool stt = (currStt == C_ALIVE) ? true : false;
+
+            mtrx.setElement(i, j, stt);
+        }
+}
+
+void LifeScene::solveCellCount()
+{
+    // Вычисление количества клеток при заданном размере сцены
+
+    rowCount    = sceneHeight / cellSize;
+    colCount    = sceneWidth  / cellSize;
 }
 
