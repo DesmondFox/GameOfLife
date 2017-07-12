@@ -47,6 +47,18 @@
         <property name="text">
          <string>Старт</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -59,7 +71,7 @@
       <item>
        <widget class="QPushButton" name="pushNextStep">
         <property name="text">
-         <string>След. поколение</string>
+         <string>След. шаг</string>
         </property>
        </widget>
       </item>
@@ -88,7 +100,6 @@
    </layout>
    <zorder>graphicsView</zorder>
    <zorder></zorder>
-   <zorder>verticalSpacer</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

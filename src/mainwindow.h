@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QtEvents>
+#include <QMessageBox>
 
 #include "lifeview.h"
-#include "lifematrix.h"
 #include "processing.h"
 
 namespace Ui {
@@ -22,9 +22,22 @@ public:
 
     void showEvent(QShowEvent *event);
 
+
+public slots:
+    // Слот окончания игры
+    void slotEndOfGame();
+
+private slots:
+    void on_pushStartPause_clicked();
+
+    void on_pushNextStep_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
     Processing  *m_proc;
+    void setButtonsEnabled(bool enabled);
 };
 
 #endif // MAINWINDOW_H
