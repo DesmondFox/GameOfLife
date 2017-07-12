@@ -58,7 +58,7 @@ public:
     inline size_t getCountRows() const { return countRow; }
     inline size_t getCountColumns() const { return countCol; }
 
-    T getElement(size_t row, size_t col)
+    T getElement(size_t row, size_t col) const
     {
         // Получение элемента массива
 

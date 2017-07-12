@@ -16,7 +16,9 @@ class GraphicsItemMatrix
 public:
     GraphicsItemMatrix();
     ~GraphicsItemMatrix();
-//    void allocMemory();
+
+    // Сделать все клетки не живыми. Очистить
+    void allDead();
 
 };
 
