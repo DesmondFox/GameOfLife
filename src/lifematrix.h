@@ -11,6 +11,7 @@ public:
 
     // Оператор сравнения
     bool operator ==(const LifeMatrix &mtrx);
+    LifeMatrix& operator =(const LifeMatrix &mtrx);
 
     // Получить количество соседей у клетки
     short getNeighbours(size_t row, size_t col);
@@ -18,9 +19,11 @@ public:
     // Получить количество элементов с true
     uint countFilled();
 
-private:
     // Заполнение массива нулями / очистка
     void fillZero();
+
+private:
+
 };
 
 #endif // LIFEMATRIX_H

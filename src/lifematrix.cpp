@@ -7,7 +7,6 @@ LifeMatrix::LifeMatrix()
 
 LifeMatrix::~LifeMatrix()
 {
-
 }
 
 bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
@@ -24,6 +23,24 @@ bool LifeMatrix::operator ==(const LifeMatrix &mtrx)
             if (this->m_matrix[i][j] != mtrx.m_matrix[i][j])
                 return false;
     return true;
+}
+
+LifeMatrix &LifeMatrix::operator =(const LifeMatrix &mtrx)
+{
+    // Перегрузка оператора сравнения
+
+    if ((this->countCol != mtrx.countCol)
+            && (this->countRow != mtrx.countRow))
+        this->reallocate(mtrx.countRow, mtrx.countCol);
+
+    for (size_t i = 0; i < this->countRow; i++)
+        for (size_t j = 0; j < this->countCol; j++)
+            this->m_matrix[i][j] = mtrx.m_matrix[i][j];
+
+    qDebug() << "Notice:\t LifeMatrix: Copying matrix...";
+
+    return *this;
+
 }
 
 short LifeMatrix::getNeighbours(size_t row, size_t col)
