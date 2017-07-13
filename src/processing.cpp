@@ -84,21 +84,20 @@ void Processing::solveNextGen()
 
     // Условия прекращения игры
 
+
     // Если поколения одинаковы
-    if (m_currentGeneration == m_nextGeneration)
+    // Или количество клеток равно нулю
+    if ((m_currentGeneration == m_nextGeneration) ||
+            (m_currentGeneration.countFilled() == 0))
     {
         emit sigGameOver();
         return;
     }
-    else
-        m_currentGeneration = m_nextGeneration;
+
+    m_currentGeneration = m_nextGeneration;
 
     // Отрисуем матрицу
     m_scene->drawMatrix(m_currentGeneration);
-
-    // Если клеток 0
-    if (m_currentGeneration.countFilled() == 0)
-        emit sigGameOver();
 
 }
 
