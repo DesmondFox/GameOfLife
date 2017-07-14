@@ -40,12 +40,13 @@ private:
     // Таймер
     QTimer m_timer;
 
+    // Номер итерации
+    uint iterNum;
+
     // Вычисление след.поколения
     void solveNextGen();
 
     void allocMatrix();
-
-
 
 signals:
     // Сигнал при окончании игры. Если вычисленное поколение равно текущему
