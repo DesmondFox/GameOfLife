@@ -51,8 +51,8 @@ private:
 signals:
     // Сигнал при окончании игры. Если вычисленное поколение равно текущему
     void sigGameOver();
-    // Сигнал при каждой итерации. [номер поколения, количество живых клеток]
-    void sigGenIteration(uint genNum, uint aliveCellsCount);
+    // Сигнал при каждой итерации. [количество живых клеток]
+    void sigGenIteration(uint aliveCellsCount);
 
 public slots:
     // Слот начатия игры с заданными параметрами

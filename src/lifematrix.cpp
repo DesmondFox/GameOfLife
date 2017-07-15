@@ -37,7 +37,7 @@ LifeMatrix &LifeMatrix::operator =(const LifeMatrix &mtrx)
         for (size_t j = 0; j < this->countCol; j++)
             this->m_matrix[i][j] = mtrx.m_matrix[i][j];
 
-    qDebug() << "Notice:\t LifeMatrix: Copying matrix...";
+//    qDebug() << "Notice:\t LifeMatrix: Copying matrix...";
 
     return *this;
 

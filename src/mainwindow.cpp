@@ -1,6 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+void MainWindow::updateStatusBar(uint _gen, uint _alive)
+{
+    // Обновление текст статусбара
+
+    QString _str  = QString(tr("Поколение: %1;\tКоличество живых клеток: %2"))
+            .arg(QString::number(_gen))
+            .arg(QString::number(_alive));
+    this->m_label->setText(_str);
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -10,16 +20,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // Сначала все обнулить
     m_proc  = nullptr;
     currentIteration = 0;
-    currentCellCount = 0;
-
-    // Зададим текст для статусбара
-    statusBarText   = QString(tr("Поколение: %1;\tКоличество живых клеток: %2"))
-            .arg(QString::number(currentIteration))
-            .arg(QString::number(currentCellCount));
 
     // Выделим память под m_label и перекинем в статусбар
     m_label = new QLabel(statusBarText, ui->statusBar);
     ui->statusBar->addWidget(m_label);
+    // Зададим текст для статусбара
+    updateStatusBar(0, 0);
 }
 
 MainWindow::~MainWindow()
@@ -38,7 +44,7 @@ void MainWindow::showEvent(QShowEvent *event)
     ui->graphicsView->setMouseTracking(true);
 
     connect(m_proc, SIGNAL(sigGameOver()), SLOT(slotEndOfGame()));
-    connect(m_proc, SIGNAL(sigGenIteration(uint,uint)), SLOT(slotIteration(uint,uint)));
+    connect(m_proc, SIGNAL(sigGenIteration(uint)), SLOT(slotIteration(uint)));
 }
 
 void MainWindow::setButtonsEnabled(bool enabled)
@@ -52,15 +58,7 @@ void MainWindow::setButtonsEnabled(bool enabled)
 
 void MainWindow::on_pushStartPause_clicked()
 {
-    this->setButtonsEnabled(!ui->pushStartPause->isChecked());
-    if (ui->pushStartPause->isChecked())
-    {
 
-    }
-    else
-    {
-
-    }
 }
 
 void MainWindow::on_pushNextStep_clicked()
@@ -75,13 +73,10 @@ void MainWindow::slotEndOfGame()
     QMessageBox::warning(this, tr("Конец"), _out);
 }
 
-void MainWindow::slotIteration(uint genNum, uint aliveCellsCount)
+void MainWindow::slotIteration(uint _aliveCells)
 {
     // Стот новой итерации
 
-//    currentIteration = genNum;
-//    currentCellCount = aliveCellsCount;
-
-//    m_label->setText(statusBarText);
-
+    currentIteration++;
+    this->updateStatusBar(currentIteration, _aliveCells);
 }

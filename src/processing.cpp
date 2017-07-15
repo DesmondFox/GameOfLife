@@ -94,10 +94,15 @@ void Processing::solveNextGen()
         return;
     }
 
+    // Сигнал о итерации
+    emit sigGenIteration(m_nextGeneration.countFilled());
+
+    // Теперь прировняем новое поколение старому
     m_currentGeneration = m_nextGeneration;
 
     // Отрисуем матрицу
     m_scene->drawMatrix(m_currentGeneration);
+
 
 }
 

@@ -28,7 +28,7 @@ public slots:
     // Слот окончания игры
     void slotEndOfGame();
     // Слот новой итерации
-    void slotIteration(uint genNum, uint aliveCellsCount);
+    void slotIteration(uint _aliveCells);
 
 private slots:
     void on_pushStartPause_clicked();
@@ -41,10 +41,10 @@ private:
 
     // Хранение текущего номера поколения и колич. ячеекы
     uint    currentIteration;
-    uint    currentCellCount;
 
     // Текст для статусбара
     QString statusBarText;
+    void updateStatusBar(uint _gen, uint _alive);
 };
 
 #endif // MAINWINDOW_H
