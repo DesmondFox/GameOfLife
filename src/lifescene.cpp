@@ -107,6 +107,12 @@ void LifeScene::fromSceneToMtrx(LifeMatrix &mtrx)
         }
 }
 
+void LifeScene::clearField()
+{
+    // Очистка поля
+    itmMatrix.allDead();
+}
+
 void LifeScene::solveCellCount()
 {
     // Вычисление количества клеток при заданном размере сцены

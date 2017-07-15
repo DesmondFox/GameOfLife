@@ -5,6 +5,7 @@
 #include <QtEvents>
 #include <QMessageBox>
 #include <QLabel>
+#include <QTimer>
 
 #include "lifeview.h"
 #include "processing.h"
@@ -23,7 +24,6 @@ public:
 
     void showEvent(QShowEvent *event);
 
-
 public slots:
     // Слот окончания игры
     void slotEndOfGame();
@@ -33,10 +33,14 @@ public slots:
 private slots:
     void on_pushStartPause_clicked();
     void on_pushNextStep_clicked();
+    void on_pushClear_clicked();
+    // метод для таймера
+    void slotTimerTimeout();
+
 private:
-    Ui::MainWindow *ui;
-    QLabel  *m_label;   // Для вывод текущей итерации
-    Processing  *m_proc;
+    Ui::MainWindow  *ui;
+    QLabel          *m_label;   // Для вывод текущей итерации
+    Processing      *m_proc;
     void    setButtonsEnabled(bool enabled);
 
     // Хранение текущего номера поколения и колич. ячеекы
@@ -45,6 +49,11 @@ private:
     // Текст для статусбара
     QString statusBarText;
     void updateStatusBar(uint _gen, uint _alive);
+
+    QTimer  m_timer;
+signals:
+    // Сигнал для очистки поля от живых клеток
+    void sigClear();
 };
 
 #endif // MAINWINDOW_H

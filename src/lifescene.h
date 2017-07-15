@@ -33,6 +33,9 @@ public:
     inline ushort  getRows() const { return rowCount; }
     inline ushort  getCols() const { return colCount; }
 
+    // Очистка поля (НЕ удаление элементов)
+    void    clearField();
+
 private:
     // Размеры сцены
     ushort  sceneWidth;

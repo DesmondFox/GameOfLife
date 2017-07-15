@@ -1,5 +1,18 @@
 #include "processing.h"
 
+Processing::Processing(ushort width, ushort height, short cellWidth, QObject *parent) : QObject(parent)
+{
+    // Запуск работы с такими параметрами сцены
+    m_scene = new LifeScene(width, height, cellWidth);
+    m_scene->draw();
+
+    // Сразу выделяем память под массивы
+    allocMatrix();
+
+    // В начале, требуется для просчета считывать сцену
+    needFromSceneMode = true;
+}
+
 void Processing::allocMatrix()
 {
     m_currentGeneration.allocate(m_scene->getRows(), m_scene->getCols());
@@ -9,34 +22,31 @@ void Processing::allocMatrix()
     m_nextGeneration.fillZero();
 }
 
-Processing::Processing(ushort width, ushort height, short cellWidth, QObject *parent) : QObject(parent)
-{
-    // Запуск работы с такими параметрами сцены
-    m_scene = new LifeScene(width, height, cellWidth);
-    m_scene->draw();
-
-    // Сразу выделяем память под массивы
-    allocMatrix();
-}
-
 Processing::~Processing()
 {
     delete m_scene;
 }
 
-void Processing::setTimerDelay(ushort msec)
-{
-    // Установка задержки таймера
-
-    qDebug() << "Notice:\t Setting a timer delay as " << msec << "ms";
-    m_timer.setInterval(msec);
-}
-
 void Processing::solveOneStep()
 {
     // Вычисление одного шага
-    m_scene->fromSceneToMtrx(m_currentGeneration);
+
+    // Если стоит флаг, то надо сначала считать клетки со сцены
+    if (needFromSceneMode)
+        m_scene->fromSceneToMtrx(m_currentGeneration);
+
     solveNextGen();
+}
+
+void Processing::clearField()
+{
+    // Очистка поля, матриц
+
+    this->m_currentGeneration.fillZero();
+    this->m_nextGeneration.fillZero();
+    this->m_scene->clearField();
+
+    qDebug() << "Notice:\t Processing: Cleaning Field...";
 }
 
 void Processing::solveNextGen()
@@ -84,7 +94,6 @@ void Processing::solveNextGen()
 
     // Условия прекращения игры
 
-
     // Если поколения одинаковы
     // Или количество клеток равно нулю
     if ((m_currentGeneration == m_nextGeneration) ||
@@ -102,19 +111,5 @@ void Processing::solveNextGen()
 
     // Отрисуем матрицу
     m_scene->drawMatrix(m_currentGeneration);
-
-
 }
 
-void Processing::slotStart(ushort tmrDelay)
-{
-    // Начало игры
-
-    this->setTimerDelay(tmrDelay);
-    m_timer.start();
-}
-
-void Processing::slotStop()
-{
-    // TODO: Принудительное окончание игры
-}

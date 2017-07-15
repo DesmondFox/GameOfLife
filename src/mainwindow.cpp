@@ -18,14 +18,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Сначала все обнулить
-    m_proc  = nullptr;
-    currentIteration = 0;
+    this->m_proc  = nullptr;
+    this->currentIteration = 0;
 
     // Выделим память под m_label и перекинем в статусбар
-    m_label = new QLabel(statusBarText, ui->statusBar);
+    this->m_label = new QLabel(statusBarText, ui->statusBar);
     ui->statusBar->addWidget(m_label);
     // Зададим текст для статусбара
     updateStatusBar(0, 0);
+
+    // Зададим интервал для таймера
+    // TODO: Регулирование таймера
+    this->m_timer.setInterval(1);
 }
 
 MainWindow::~MainWindow()
@@ -43,8 +47,9 @@ void MainWindow::showEvent(QShowEvent *event)
     ui->graphicsView->setScene(m_proc->getScene());
     ui->graphicsView->setMouseTracking(true);
 
-    connect(m_proc, SIGNAL(sigGameOver()), SLOT(slotEndOfGame()));
-    connect(m_proc, SIGNAL(sigGenIteration(uint)), SLOT(slotIteration(uint)));
+    connect(m_proc, SIGNAL(sigGameOver()),          SLOT(slotEndOfGame()));
+    connect(m_proc, SIGNAL(sigGenIteration(uint)),  SLOT(slotIteration(uint)));
+    connect(&this->m_timer, SIGNAL(timeout()),      SLOT(slotTimerTimeout()));
 }
 
 void MainWindow::setButtonsEnabled(bool enabled)
@@ -58,7 +63,27 @@ void MainWindow::setButtonsEnabled(bool enabled)
 
 void MainWindow::on_pushStartPause_clicked()
 {
+    // Нажатие кнопки Старт/Стоп
 
+    this->setButtonsEnabled(!ui->pushStartPause->isChecked());
+    if (ui->pushStartPause->isChecked())
+    {
+        ui->pushStartPause->setText(tr("Стоп"));
+
+        this->currentIteration = 0;
+        this->updateStatusBar(0, 0);
+
+
+        this->m_timer.start();
+        qDebug() << "Notice:\t Timer: Started";
+
+    }
+    else
+    {
+        ui->pushStartPause->setText(tr("Старт"));
+        this->m_timer.stop();
+        qDebug() << "Notice:\t Timer: Stopped";
+    }
 }
 
 void MainWindow::on_pushNextStep_clicked()
@@ -68,8 +93,19 @@ void MainWindow::on_pushNextStep_clicked()
 
 void MainWindow::slotEndOfGame()
 {
-    QString _out = QString(tr("Игра окончена на %1 итерации")).
-            arg(QString::number(currentIteration));
+    ui->pushStartPause->setText(tr("Старт"));
+    ui->pushStartPause->setChecked(false);
+
+    this->setButtonsEnabled(true);
+    this->m_timer.stop();
+    QString _out;
+
+    if (this->currentIteration != 0)
+        _out = QString(tr("Игра окончена на %1 итерации")).
+                   arg(QString::number(currentIteration));
+    else
+        _out = QString(tr("Поле пустое"));
+
     QMessageBox::warning(this, tr("Конец"), _out);
 }
 
@@ -79,4 +115,18 @@ void MainWindow::slotIteration(uint _aliveCells)
 
     currentIteration++;
     this->updateStatusBar(currentIteration, _aliveCells);
+}
+
+void MainWindow::on_pushClear_clicked()
+{
+    // Очистка поля, обнуление переменных
+    this->currentIteration = 0;
+    this->updateStatusBar(0, 0);
+    this->m_proc->clearField();
+}
+
+void MainWindow::slotTimerTimeout()
+{
+    // Действия при включенном таймере
+    this->m_proc->solveOneStep();
 }

@@ -6,8 +6,6 @@
 #define PROCESSING_H
 
 #include <QObject>
-#include <QTimer>
-
 #include "lifescene.h"
 #include "lifematrix.h"
 
@@ -18,16 +16,15 @@ public:
     explicit Processing(ushort width, ushort height, short cellWidth, QObject *parent = nullptr);
     ~Processing();
 
-    // Установка задержки таймера
-    void setTimerDelay(ushort msec = 100);
-
     // Получение сцены (для GraphicsView)
     //! используется только для задания сцены QGraphicsView и нигде больше!
     LifeScene* getScene() const { return m_scene; }
 
-
     // Слот для вычисления одного шага
     void solveOneStep();
+
+    // Очистка поля (но не удаление элементов)
+    void clearField();
 
 private:
     // Матрицы текущего и следующего поколения
@@ -37,16 +34,14 @@ private:
     // Сцена
     LifeScene *m_scene;
 
-    // Таймер
-    QTimer m_timer;
-
-    // Номер итерации
-    uint iterNum;
-
     // Вычисление след.поколения
     void solveNextGen();
 
     void allocMatrix();
+
+    // Специальный флаг, означающий, нужно ли перед просчетом поколения
+    // считывать сцену (если одиночный просчет)
+    bool needFromSceneMode;
 
 signals:
     // Сигнал при окончании игры. Если вычисленное поколение равно текущему
@@ -55,11 +50,6 @@ signals:
     void sigGenIteration(uint aliveCellsCount);
 
 public slots:
-    // Слот начатия игры с заданными параметрами
-    void slotStart(ushort tmrDelay);
-    // Слот принудительного окончания игры
-    void slotStop();
-
 };
 
 #endif // PROCESSING_H
