@@ -13,8 +13,7 @@ public:
     explicit LifeView(QWidget *parent = nullptr);
 
     void mousePressEvent(QMouseEvent *event);
-    void showEvent(QShowEvent *event);
-    void resizeEvent(QResizeEvent *event);
+
 signals:
 
 public slots:
