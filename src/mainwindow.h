@@ -9,6 +9,7 @@
 
 #include "lifeview.h"
 #include "processing.h"
+#include "settingsdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,8 @@ private slots:
     void on_pushClear_clicked();
     // метод для таймера
     void slotTimerTimeout();
+
+    void on_pushSettings_clicked();
 
 private:
     Ui::MainWindow  *ui;

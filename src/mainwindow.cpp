@@ -100,6 +100,8 @@ void MainWindow::slotEndOfGame()
     this->m_timer.stop();
     QString _out;
 
+    // Проверяем, было ли поле до этого пустое,
+    // то есть проверяем на ненулевую генерацию
     if (this->currentIteration != 0)
         _out = QString(tr("Игра окончена на %1 итерации")).
                    arg(QString::number(currentIteration));
@@ -129,4 +131,12 @@ void MainWindow::slotTimerTimeout()
 {
     // Действия при включенном таймере
     this->m_proc->solveOneStep();
+}
+
+void MainWindow::on_pushSettings_clicked()
+{
+    SettingsDialog settingsDialog;
+
+    if (settingsDialog.exec() == SettingsDialog::Accepted)
+        qDebug() << "ololo";
 }

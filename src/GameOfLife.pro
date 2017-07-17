@@ -36,7 +36,8 @@ SOURCES += \
     lifescene.cpp \
     lifeview.cpp \
     lifematrix.cpp \
-    graphicsitemmatrix.cpp
+    graphicsitemmatrix.cpp \
+    settingsdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,9 @@ HEADERS += \
     lifeview.h \
     basematrix.h \
     lifematrix.h \
-    graphicsitemmatrix.h
+    graphicsitemmatrix.h \
+    settingsdialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    settingsdialog.ui
