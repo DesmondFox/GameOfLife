@@ -55,8 +55,8 @@ void LifeScene::draw()
             QRectF  rect;
 
             // Вычисление координат клетки
-            qreal x  = j * cellSize;
-            qreal y  = i * cellSize;
+            qreal x  = j * (cellSize + 1);
+            qreal y  = i * (cellSize + 1);
 
             rect.setX(x);               rect.setY(y);
             rect.setWidth(cellSize);    rect.setHeight(cellSize);
@@ -117,7 +117,7 @@ void LifeScene::solveCellCount()
 {
     // Вычисление количества клеток при заданном размере сцены
 
-    rowCount    = sceneHeight / cellSize;
-    colCount    = sceneWidth  / cellSize;
+    rowCount    = sceneHeight / (cellSize+1);
+    colCount    = sceneWidth  / (cellSize+1);
 }
 
