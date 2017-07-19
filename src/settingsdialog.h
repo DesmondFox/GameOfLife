@@ -15,6 +15,14 @@ public:
     explicit SettingsDialog(QWidget *parent = 0);
     ~SettingsDialog();
 
+    // сеттеры/геттеры для полей
+    void setRowsCols(uint _row, uint _col);
+    void setCellSize(short _px);
+
+    uint getRows() const;
+    uint getCols() const;
+    short getCellSize() const;
+
 private:
     Ui::SettingsDialog *ui;
 };
