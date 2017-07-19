@@ -32,6 +32,7 @@ public:
 
     inline ushort  getRows() const { return rowCount; }
     inline ushort  getCols() const { return colCount; }
+    inline short   getCellSize() const { return cellSize; }
 
     // Очистка поля (НЕ удаление элементов)
     void    clearField();

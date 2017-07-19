@@ -2,6 +2,9 @@
 // Класс механики игры
 //
 
+// TODO: Перевести строки/столбцы на ushort или int
+
+
 #ifndef PROCESSING_H
 #define PROCESSING_H
 
@@ -25,6 +28,12 @@ public:
 
     // Очистка поля (но не удаление элементов)
     void clearField();
+
+
+    // Сеттеры/геттеры для размеров поля
+    int getRows() const { return m_scene->getRows(); }
+    int getCols() const { return m_scene->getCols(); }
+    short getCellSize() const { return m_scene->getCellSize(); }
 
 private:
     // Матрицы текущего и следующего поколения
