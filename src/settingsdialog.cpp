@@ -16,10 +16,10 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::setRowsCols(int _row, int _col)
 {
     // Задать количество строк/столбцов в форме
-    Q_ASSERT(_row < ui->sbRows->maximum()
-             && _row > ui->sbRows->minimum());
-    Q_ASSERT(_col < ui->sbCols->maximum()
-             && _col > ui->sbCols->minimum());
+    Q_ASSERT(_row <= ui->sbRows->maximum()
+             && _row >= ui->sbRows->minimum());
+    Q_ASSERT(_col <= ui->sbCols->maximum()
+             && _col >= ui->sbCols->minimum());
 
     ui->sbRows->setValue(_row);
     ui->sbCols->setValue(_col);
@@ -28,8 +28,8 @@ void SettingsDialog::setRowsCols(int _row, int _col)
 void SettingsDialog::setCellSize(short _px)
 {
     // Задать размер клетки
-    Q_ASSERT(_px < ui->sbCellSize->maximum()
-             && _px > ui->sbCellSize->minimum());
+    Q_ASSERT(_px <= ui->sbCellSize->maximum()
+             && _px >= ui->sbCellSize->minimum());
 
     ui->sbCellSize->setValue(_px);
 }
@@ -37,8 +37,8 @@ void SettingsDialog::setCellSize(short _px)
 void SettingsDialog::setDelay(short _ms)
 {
     // Задать интервал
-    Q_ASSERT(_ms < ui->sbTimerDelay->maximum()
-             && _ms > ui->sbTimerDelay->minimum());
+    Q_ASSERT(_ms <= ui->sbTimerDelay->maximum()
+             && _ms >= ui->sbTimerDelay->minimum());
 
     ui->sbTimerDelay->setValue(_ms);
 }

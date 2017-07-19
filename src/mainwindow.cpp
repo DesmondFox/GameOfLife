@@ -135,7 +135,14 @@ void MainWindow::slotTimerTimeout()
 
 void MainWindow::on_pushSettings_clicked()
 {
+    Q_CHECK_PTR(m_proc);
+
     SettingsDialog settingsDialog;
+
+    // Зададим текущие значения поля
+    settingsDialog.setRowsCols(m_proc->getRows(), m_proc->getCols());
+    settingsDialog.setCellSize(m_proc->getCellSize());
+    settingsDialog.setDelay(this->m_timer.interval());
 
     if (settingsDialog.exec() == SettingsDialog::Accepted)
         qDebug() << "ololo";
