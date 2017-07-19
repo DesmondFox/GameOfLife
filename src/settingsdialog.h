@@ -16,12 +16,14 @@ public:
     ~SettingsDialog();
 
     // сеттеры/геттеры для полей
-    void setRowsCols(uint _row, uint _col);
+    void setRowsCols(int _row, int _col);
     void setCellSize(short _px);
+    void setDelay(short _ms);
 
-    uint getRows() const;
-    uint getCols() const;
+    int getRows() const;
+    int getCols() const;
     short getCellSize() const;
+    short getDelay() const;
 
 private:
     Ui::SettingsDialog *ui;

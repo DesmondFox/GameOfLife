@@ -34,6 +34,15 @@ void SettingsDialog::setCellSize(short _px)
     ui->sbCellSize->setValue(_px);
 }
 
+void SettingsDialog::setDelay(short _ms)
+{
+    // Задать интервал
+    Q_ASSERT(_ms < ui->sbTimerDelay->maximum()
+             && _ms > ui->sbTimerDelay->minimum());
+
+    ui->sbTimerDelay->setValue(_ms);
+}
+
 int SettingsDialog::getRows() const
 {
     return ui->sbRows->value();
@@ -47,4 +56,9 @@ int SettingsDialog::getCols() const
 short SettingsDialog::getCellSize() const
 {
     return ui->sbCellSize->value();
+}
+
+short SettingsDialog::getDelay() const
+{
+    return ui->sbTimerDelay->value();
 }
