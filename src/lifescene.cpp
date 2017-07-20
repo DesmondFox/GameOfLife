@@ -12,7 +12,7 @@ LifeScene::LifeScene(ushort width, ushort height, ushort cellWidth, QObject *par
     this->colCount  = 0;
 
     // Покрасим сцену в серый цвет
-    this->setBackgroundBrush(QBrush(Qt::gray));
+    this->setBackgroundBrush(QBrush(QColor(200, 200, 200, 100)));
 
     // Сразу вычислим строки/столбцы
     this->solveCellCount();
@@ -55,8 +55,8 @@ void LifeScene::draw()
             QRectF  rect;
 
             // Вычисление координат клетки
-            qreal x  = j * (cellSize + 1);
-            qreal y  = i * (cellSize + 1);
+            qreal x  = j * (cellSize+SPACE);
+            qreal y  = i * (cellSize+SPACE);
 
             rect.setX(x);               rect.setY(y);
             rect.setWidth(cellSize);    rect.setHeight(cellSize);
@@ -117,7 +117,7 @@ void LifeScene::solveCellCount()
 {
     // Вычисление количества клеток при заданном размере сцены
 
-    rowCount    = sceneHeight / (cellSize+1);
-    colCount    = sceneWidth  / (cellSize+1);
+    rowCount    = sceneHeight / (cellSize+SPACE);
+    colCount    = sceneWidth  / (cellSize+SPACE);
 }
 

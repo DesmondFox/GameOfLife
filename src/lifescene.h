@@ -38,6 +38,9 @@ public:
     void    clearField();
 
 private:
+    // Отступ между клетками
+    static const short SPACE = 2;
+
     // Размеры сцены
     ushort  sceneWidth;
     ushort  sceneHeight;

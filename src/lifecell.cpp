@@ -41,5 +41,5 @@ void LifeCell::changeStatus(CellStatus stt)
         this->setBrush(Qt::black);
     if (stt == C_DIED)
         this->setBrush(Qt::white);
-    this->setPen(QPen(QColor(150, 150, 150, 100)));
+    this->setPen(QPen(QColor(200, 200, 200, 100)));
 }
