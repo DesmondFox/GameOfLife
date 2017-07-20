@@ -27,27 +27,24 @@ void LifeScene::setRowColCount(uint row, uint col)
     // Задать конкретное количество строк/столбцов
     Q_ASSERT(row > 0 && col > 0);
 
-    if (this->rowCount == row && this->colCount == col)
-        return;
-
     this->rowCount  = row;
     this->colCount  = col;
-
+    this->itmMatrix.reallocate(row, col);
 }
 
 void LifeScene::setCellSize(ushort width)
 {
     Q_ASSERT(width > 0);
 
-    this->cellSize  = width;
+    qDebug() << "Notice:\t Proc: Resizing of cell: " << width;
+    this->cellSize = width;
 }
 
-void LifeScene::draw()
+void LifeScene::drawNewField()
 {
     Q_ASSERT(rowCount > 0 && colCount > 0);
     Q_ASSERT(cellSize > 0);
 
-    itmMatrix.allocate(rowCount, colCount);
     for (size_t i = 0; i < rowCount; i++)
     {
         for (size_t j = 0; j < colCount; j++)
@@ -71,7 +68,6 @@ void LifeScene::draw()
 
 void LifeScene::drawMatrix(const LifeMatrix &mtrx)
 {
-    // TODO: Отрисовка заданной матрицы
 
     Q_ASSERT(mtrx.getCountRows()    == this->itmMatrix.getCountRows());
     Q_ASSERT(mtrx.getCountColumns() == this->itmMatrix.getCountColumns());

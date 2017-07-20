@@ -29,11 +29,13 @@ public:
     // Очистка поля (но не удаление элементов)
     void clearField();
 
+    // Установление новых параметров
+    void setParameters(ushort row, ushort col, ushort cellsize);
 
     // Сеттеры/геттеры для размеров поля
     int getRows() const { return m_scene->getRows(); }
     int getCols() const { return m_scene->getCols(); }
-    short getCellSize() const { return m_scene->getCellSize(); }
+    ushort getCellSize() const { return m_scene->getCellSize(); }
 
 private:
     // Матрицы текущего и следующего поколения

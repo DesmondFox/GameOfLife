@@ -53,7 +53,8 @@ private:
     QString statusBarText;
     void updateStatusBar(uint _gen, uint _alive);
 
-    QTimer  m_timer;
+    // Таймер для вычислений поколений
+    QTimer  m_mainTimer;
 signals:
     // Сигнал для очистки поля от живых клеток
     void sigClear();

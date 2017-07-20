@@ -4,7 +4,8 @@ Processing::Processing(ushort width, ushort height, short cellWidth, QObject *pa
 {
     // Запуск работы с такими параметрами сцены
     m_scene = new LifeScene(width, height, cellWidth);
-    m_scene->draw();
+    m_scene->setRowColCount(m_scene->getRows(), m_scene->getCols());
+    m_scene->drawNewField();
 
     // Сразу выделяем память под массивы
     allocMatrix();
@@ -42,11 +43,40 @@ void Processing::clearField()
 {
     // Очистка поля, матриц
 
+    qDebug() << "Notice:\t Processing: Cleaning Field...";
     this->m_currentGeneration.fillZero();
     this->m_nextGeneration.fillZero();
     this->m_scene->clearField();
+}
 
-    qDebug() << "Notice:\t Processing: Cleaning Field...";
+void Processing::setParameters(ushort row, ushort col, ushort cellsize)
+{
+    // Установка новых параметров
+
+    ushort _oldsize = this->m_scene->getCellSize();
+    this->m_scene->setCellSize(cellsize);
+
+    // Если мы поменяли размер, то всё переделываем
+    if (!(row == this->m_scene->getRows()
+          && col == this->m_scene->getCols()))
+    {
+        this->m_currentGeneration.reallocate(row, col);
+        this->m_nextGeneration.reallocate(row, col);
+        this->m_scene->setRowColCount(row, col);
+        this->m_scene->clear();
+        this->m_scene->drawNewField();
+    }
+    else
+    {
+        // Если мы поменяли только размер клетки, то перерисуем поле с сохранением состояний клеток
+        if (cellsize != _oldsize)
+        {
+            this->m_scene->fromSceneToMtrx(this->m_currentGeneration);
+            this->m_scene->clear();
+            this->m_scene->drawNewField();
+            this->m_scene->drawMatrix(this->m_currentGeneration);
+        }
+    }
 }
 
 void Processing::solveNextGen()

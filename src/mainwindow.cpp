@@ -28,8 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     updateStatusBar(0, 0);
 
     // Зададим интервал для таймера
-    // TODO: Регулирование таймера
-    this->m_timer.setInterval(1);
+    this->m_mainTimer.setInterval(100);
 }
 
 MainWindow::~MainWindow()
@@ -49,7 +48,7 @@ void MainWindow::showEvent(QShowEvent *event)
 
     connect(m_proc, SIGNAL(sigGameOver()),          SLOT(slotEndOfGame()));
     connect(m_proc, SIGNAL(sigGenIteration(uint)),  SLOT(slotIteration(uint)));
-    connect(&this->m_timer, SIGNAL(timeout()),      SLOT(slotTimerTimeout()));
+    connect(&this->m_mainTimer, SIGNAL(timeout()),  SLOT(slotTimerTimeout()));
 }
 
 void MainWindow::setButtonsEnabled(bool enabled)
@@ -74,14 +73,14 @@ void MainWindow::on_pushStartPause_clicked()
         this->updateStatusBar(0, 0);
 
 
-        this->m_timer.start();
+        this->m_mainTimer.start();
         qDebug() << "Notice:\t Timer: Started";
 
     }
     else
     {
         ui->pushStartPause->setText(tr("Старт"));
-        this->m_timer.stop();
+        this->m_mainTimer.stop();
         qDebug() << "Notice:\t Timer: Stopped";
     }
 }
@@ -97,9 +96,14 @@ void MainWindow::slotEndOfGame()
     ui->pushStartPause->setChecked(false);
 
     this->setButtonsEnabled(true);
-    this->m_timer.stop();
-    QString _out;
 
+    if (this->m_mainTimer.isActive())
+    {
+        this->m_mainTimer.stop();
+        qDebug() << "Notice:\t Timer: Stopped";
+    }
+
+    QString _out;
     // Проверяем, было ли поле до этого пустое,
     // то есть проверяем на ненулевую генерацию
     if (this->currentIteration != 0)
@@ -142,8 +146,16 @@ void MainWindow::on_pushSettings_clicked()
     // Зададим текущие значения поля
     settingsDialog.setRowsCols(m_proc->getRows(), m_proc->getCols());
     settingsDialog.setCellSize(m_proc->getCellSize());
-    settingsDialog.setDelay(this->m_timer.interval());
+    settingsDialog.setDelay(this->m_mainTimer.interval());
 
     if (settingsDialog.exec() == SettingsDialog::Accepted)
-        qDebug() << "ololo";
+    {
+        qDebug() << "Notice:\t Settings: New parameters";
+        this->m_proc->setParameters(settingsDialog.getRows(),
+                                    settingsDialog.getCols(),
+                                    settingsDialog.getCellSize());
+        this->m_mainTimer.setInterval(settingsDialog.getDelay());
+
+    }
+
 }

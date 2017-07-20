@@ -24,7 +24,7 @@ public:
     void    setCellSize(ushort width);
 
     // Перерисовка сцены. Клетки все ЧИСТЫЕ
-    void    draw();
+    void    drawNewField();
 
     // Отрисовка матрицы
     void    drawMatrix(const LifeMatrix &mtrx);
@@ -36,6 +36,7 @@ public:
 
     // Очистка поля (НЕ удаление элементов)
     void    clearField();
+    // Перерисовка сцены с сохранением состояний клеток
 
 private:
     // Отступ между клетками
