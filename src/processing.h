@@ -37,6 +37,8 @@ public:
     int getCols() const { return m_scene->getCols(); }
     ushort getCellSize() const { return m_scene->getCellSize(); }
 
+    // режим считывание поля
+    void setNeedToReadField(bool stt);
 private:
     // Матрицы текущего и следующего поколения
     LifeMatrix m_currentGeneration;

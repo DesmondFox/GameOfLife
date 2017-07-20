@@ -79,6 +79,15 @@ void Processing::setParameters(ushort row, ushort col, ushort cellsize)
     }
 }
 
+void Processing::setNeedToReadField(bool stt)
+{
+    if (!stt)
+        this->m_scene->fromSceneToMtrx(m_currentGeneration);
+
+    this->needFromSceneMode = stt;
+    qDebug() << "Notice:\t Proc: Set ReadMode: " << stt;
+}
+
 void Processing::solveNextGen()
 {
     // Вычисление следующего поколения

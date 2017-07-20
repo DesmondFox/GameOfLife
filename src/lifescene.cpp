@@ -36,7 +36,6 @@ void LifeScene::setCellSize(ushort width)
 {
     Q_ASSERT(width > 0);
 
-    qDebug() << "Notice:\t Proc: Resizing of cell: " << width;
     this->cellSize = width;
 }
 
@@ -93,6 +92,7 @@ void LifeScene::fromSceneToMtrx(LifeMatrix &mtrx)
     size_t  rows = mtrx.getCountRows(),
             cols = mtrx.getCountColumns();
 
+    qDebug() << "Notice:\t Scene: Reading from scene...";
     for (size_t i = 0; i < rows; i++)
         for (size_t j = 0; j < cols; j++)
         {

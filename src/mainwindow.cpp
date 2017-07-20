@@ -71,7 +71,7 @@ void MainWindow::on_pushStartPause_clicked()
 
         this->currentIteration = 0;
         this->updateStatusBar(0, 0);
-
+        this->m_proc->setNeedToReadField(false);
 
         this->m_mainTimer.start();
         qDebug() << "Notice:\t Timer: Started";
@@ -80,6 +80,8 @@ void MainWindow::on_pushStartPause_clicked()
     else
     {
         ui->pushStartPause->setText(tr("Старт"));
+        this->m_proc->setNeedToReadField(true);
+
         this->m_mainTimer.stop();
         qDebug() << "Notice:\t Timer: Stopped";
     }
@@ -97,6 +99,8 @@ void MainWindow::slotEndOfGame()
 
     this->setButtonsEnabled(true);
 
+    m_proc->setNeedToReadField(true);
+
     if (this->m_mainTimer.isActive())
     {
         this->m_mainTimer.stop();
@@ -112,7 +116,7 @@ void MainWindow::slotEndOfGame()
     else
         _out = QString(tr("Поле пустое"));
 
-    QMessageBox::warning(this, tr("Конец"), _out);
+    QMessageBox::information(this, tr("Конец"), _out);
 }
 
 void MainWindow::slotIteration(uint _aliveCells)
@@ -155,7 +159,6 @@ void MainWindow::on_pushSettings_clicked()
                                     settingsDialog.getCols(),
                                     settingsDialog.getCellSize());
         this->m_mainTimer.setInterval(settingsDialog.getDelay());
-
     }
 
 }
