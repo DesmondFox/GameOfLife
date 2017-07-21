@@ -29,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Зададим интервал для таймера
     this->m_mainTimer.setInterval(100);
+
+    // Зададим иконки для тулбара
 }
 
 MainWindow::~MainWindow()
@@ -55,47 +57,15 @@ void MainWindow::setButtonsEnabled(bool enabled)
 {
     // Установка доступности кнопок при старте/стопе
 
-    ui->pushSettings->setEnabled(enabled);
-    ui->pushClear->setEnabled(enabled);
-    ui->pushNextStep->setEnabled(enabled);
-}
-
-void MainWindow::on_pushStartPause_clicked()
-{
-    // Нажатие кнопки Старт/Стоп
-
-    this->setButtonsEnabled(!ui->pushStartPause->isChecked());
-    if (ui->pushStartPause->isChecked())
-    {
-        ui->pushStartPause->setText(tr("Стоп"));
-
-        this->currentIteration = 0;
-        this->updateStatusBar(0, 0);
-        this->m_proc->setNeedToReadField(false);
-
-        this->m_mainTimer.start();
-        qDebug() << "Notice:\t Timer: Started";
-
-    }
-    else
-    {
-        ui->pushStartPause->setText(tr("Старт"));
-        this->m_proc->setNeedToReadField(true);
-
-        this->m_mainTimer.stop();
-        qDebug() << "Notice:\t Timer: Stopped";
-    }
-}
-
-void MainWindow::on_pushNextStep_clicked()
-{
-    m_proc->solveOneStep();
+    ui->acSettings->setEnabled(enabled);
+    ui->acClear->setEnabled(enabled);
+    ui->acNextStep->setEnabled(enabled);
 }
 
 void MainWindow::slotEndOfGame()
 {
-    ui->pushStartPause->setText(tr("Старт"));
-    ui->pushStartPause->setChecked(false);
+    ui->acStartStop->setText(tr("Старт"));
+    ui->acStartStop->setChecked(false);
 
     this->setButtonsEnabled(true);
 
@@ -127,21 +97,40 @@ void MainWindow::slotIteration(uint _aliveCells)
     this->updateStatusBar(currentIteration, _aliveCells);
 }
 
-void MainWindow::on_pushClear_clicked()
-{
-    // Очистка поля, обнуление переменных
-    this->currentIteration = 0;
-    this->updateStatusBar(0, 0);
-    this->m_proc->clearField();
-}
-
 void MainWindow::slotTimerTimeout()
 {
     // Действия при включенном таймере
     this->m_proc->solveOneStep();
 }
 
-void MainWindow::on_pushSettings_clicked()
+void MainWindow::on_acStartStop_triggered()
+{
+    // Нажатие кнопки Старт/Стоп
+
+    this->setButtonsEnabled(!ui->acStartStop->isChecked());
+    if (ui->acStartStop->isChecked())
+    {
+        ui->acStartStop->setText(tr("Стоп"));
+
+        this->currentIteration = 0;
+        this->updateStatusBar(0, 0);
+        this->m_proc->setNeedToReadField(false);
+
+        this->m_mainTimer.start();
+        qDebug() << "Notice:\t Timer: Started";
+
+    }
+    else
+    {
+        ui->acStartStop->setText(tr("Старт"));
+        this->m_proc->setNeedToReadField(true);
+        this->m_mainTimer.stop();
+
+        qDebug() << "Notice:\t Timer: Stopped";
+    }
+}
+
+void MainWindow::on_acSettings_triggered()
 {
     Q_CHECK_PTR(m_proc);
 
@@ -160,5 +149,23 @@ void MainWindow::on_pushSettings_clicked()
                                     settingsDialog.getCellSize());
         this->m_mainTimer.setInterval(settingsDialog.getDelay());
     }
+
+}
+
+void MainWindow::on_acNextStep_triggered()
+{
+    m_proc->solveOneStep();
+}
+
+void MainWindow::on_acClear_triggered()
+{
+    // Очистка поля, обнуление переменных
+    this->currentIteration = 0;
+    this->updateStatusBar(0, 0);
+    this->m_proc->clearField();
+}
+
+void MainWindow::on_acAbout_triggered()
+{
 
 }

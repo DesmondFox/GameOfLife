@@ -19,7 +19,6 @@ enum CellStatus
 
 class LifeCell : public QGraphicsRectItem
 {
-// FIXME: Исправить нажатие на края элемента
 public:
     explicit LifeCell(const QRectF &rect, QGraphicsItem *parent = nullptr);
 

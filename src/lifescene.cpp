@@ -16,6 +16,8 @@ LifeScene::LifeScene(ushort width, ushort height, ushort cellWidth, QObject *par
 
     // Сразу вычислим строки/столбцы
     this->solveCellCount();
+
+    this->itmMatrix.setDbgName("Item Matrix");
 }
 
 LifeScene::~LifeScene()

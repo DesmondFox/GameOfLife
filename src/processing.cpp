@@ -7,6 +7,9 @@ Processing::Processing(ushort width, ushort height, short cellWidth, QObject *pa
     m_scene->setRowColCount(m_scene->getRows(), m_scene->getCols());
     m_scene->drawNewField();
 
+    m_currentGeneration.setDbgName("Current Gen");
+    m_nextGeneration.setDbgName("Next Gen");
+
     // Сразу выделяем память под массивы
     allocMatrix();
 

@@ -32,13 +32,18 @@ public slots:
     void slotIteration(uint _aliveCells);
 
 private slots:
-    void on_pushStartPause_clicked();
-    void on_pushNextStep_clicked();
-    void on_pushClear_clicked();
     // метод для таймера
     void slotTimerTimeout();
 
-    void on_pushSettings_clicked();
+    void on_acStartStop_triggered();
+
+    void on_acSettings_triggered();
+
+    void on_acNextStep_triggered();
+
+    void on_acClear_triggered();
+
+    void on_acAbout_triggered();
 
 private:
     Ui::MainWindow  *ui;

@@ -40,13 +40,13 @@ public:
         countCol = columnCount;
         countRow = rowCount;
 
-        qDebug() << "Notice:\t Created Matrix [" << countRow << "][" << countCol << "]";
+        qDebug() << "Notice:\t " << objname << ": Created Matrix [" << countRow << "][" << countCol << "]";
     }
 
     // Заново создаем массив (изменяем размер, только всё с нуля)
     void reallocate(size_t rowCount, size_t columnCount)
     {
-        qDebug() << "Notice:\t Reallocating memory for a Matrix to ["
+        qDebug() << "Notice:\t " << objname << ": Reallocating memory for a Matrix to ["
                  << rowCount << "]["
                  << columnCount << "]";
 
@@ -79,6 +79,11 @@ public:
         m_matrix[row][col] = value;
     }
 
+    void setDbgName(const QString &name)
+    {
+        objname = name;
+    }
+
 protected:
     // Матрица, собственно
     T    **m_matrix;
@@ -87,6 +92,8 @@ protected:
     size_t  countCol;
     size_t  countRow;
 
+    // Имя для объёкта
+    QString objname;
     // Удаление массива
     virtual void deleteMatrix()
     {
@@ -98,7 +105,7 @@ protected:
         // На всякий случай приравниваем к nullptr
         m_matrix = nullptr;
 
-        qDebug() << "Notice:\t Deleting a matrix";
+        qDebug() << "Notice:\t " << objname << ": Deleting a matrix";
     }
 };
 
