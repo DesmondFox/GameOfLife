@@ -27,6 +27,14 @@ public:
 
 private:
     Ui::SettingsDialog *ui;
+
+    // При каких значениях показывать предупреждающую надпись
+    static const int WrnCount = 1000;
+    // Показ предупреждающей надписи
+    void showingWrn();
+
+private slots:
+    void slotAnyValuesChanged();
 };
 
 #endif // SETTINGSDIALOG_H
