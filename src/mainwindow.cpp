@@ -167,5 +167,6 @@ void MainWindow::on_acClear_triggered()
 
 void MainWindow::on_acAbout_triggered()
 {
-
+    AboutDialog aboutDlg;
+    aboutDlg.exec();
 }

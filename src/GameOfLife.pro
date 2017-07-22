@@ -37,7 +37,8 @@ SOURCES += \
     lifeview.cpp \
     lifematrix.cpp \
     graphicsitemmatrix.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    aboutdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,11 +49,13 @@ HEADERS += \
     basematrix.h \
     lifematrix.h \
     graphicsitemmatrix.h \
-    settingsdialog.h
+    settingsdialog.h \
+    aboutdialog.h
 
 FORMS += \
         mainwindow.ui \
-    settingsdialog.ui
+    settingsdialog.ui \
+    aboutdialog.ui
 
 RESOURCES += \
     resourses.qrc
