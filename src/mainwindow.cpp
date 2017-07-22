@@ -30,7 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Зададим интервал для таймера
     this->m_mainTimer.setInterval(100);
 
-    // Зададим иконки для тулбара
+    // Зададим иконку для приложения
+    this->setWindowIcon(QIcon(":/icons/icons/winicon.png"));
 }
 
 MainWindow::~MainWindow()
