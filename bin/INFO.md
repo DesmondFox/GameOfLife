@@ -1,9 +1,10 @@
-|ФАЙЛ |АРХИТЕКТУРА|SSE|Рекомедуется?|
-|-----|--------|------|-------------|
-|GameOfLife |x86-64|+|+|
-|GameOfLife-core2 |Intel Core 2|+|-|
-|GameOfLife-i7 |Intel Core i7|+|-|
-|GameOfLife-p64 |Intel Pentium (x64)|-|-|
-|GameOfLife-athlon64 |AMD Athlon64|-|-|
+|ФАЙЛ |ПЛАТФОРМА|АРХИТЕКТУРА|SSE|Рекомедуется?|
+|-----|---------|--------|------|-------------|
+|GameOfLife-win32.exe|Windows|x86|+|+|
+|GameOfLife|Linux|x86-64|+|+|
+|GameOfLife-core2|Linux|Intel Core 2|+|-|
+|GameOfLife-i7|Linux|Intel Core i7|+|-|
+|GameOfLife-p64|Linux|Intel Pentium (x64)|-|-|
+|GameOfLife-athlon64|Linux|AMD Athlon64|-|-|
 
-При возникновении проблем с работой бинарных файлов - обращайтесь [сюда](greenvolt@tuta.io). 
+При возникновении проблем с бинарными файлами Linux - обращайтесь [сюда](greenvolt@tuta.io). 

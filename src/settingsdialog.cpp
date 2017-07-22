@@ -6,6 +6,9 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+
+    connect(ui->sbCols, SIGNAL(valueChanged(int)), SLOT(slotAnyValuesChanged()));
+    connect(ui->sbRows, SIGNAL(valueChanged(int)), SLOT(slotAnyValuesChanged()));
 }
 
 SettingsDialog::~SettingsDialog()
@@ -61,4 +64,20 @@ short SettingsDialog::getCellSize() const
 short SettingsDialog::getDelay() const
 {
     return ui->sbTimerDelay->value();
+}
+
+void SettingsDialog::showingWrn()
+{
+    if (ui->sbCols->value() >= WrnCount
+            || ui->sbRows->value() >= WrnCount)
+        ui->labelWarn->setText(QString(tr("<font color=red>При больших значениях могут<br> "
+                                          "возникать подвисания и вылеты приложения.<br> Будьте осторожны</font>")));
+    else
+        ui->labelWarn->setText("");
+}
+
+void SettingsDialog::slotAnyValuesChanged()
+{
+    // Если любое из двух spinbox изменено
+    showingWrn();
 }

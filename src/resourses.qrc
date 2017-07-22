@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/icons">
         <file>icons/play.png</file>
+        <file>icons/winicon.png</file>
     </qresource>
 </RCC>

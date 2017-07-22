@@ -10,6 +10,7 @@
 #include "lifeview.h"
 #include "processing.h"
 #include "settingsdialog.h"
+#include "aboutdialog.h"
 
 namespace Ui {
 class MainWindow;
