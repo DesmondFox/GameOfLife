@@ -20,7 +20,7 @@ Game Of Life
 
 Также необходимо наличие компилятора GCC или MinGW (Зависит от системы).
 
-СВЕЖИЙ [РЕЛИЗ](https://github.com/DesmondFox/GameOfLife/releases)
+СВЕЖИЙ РЕЛИЗ
 -----------
 
 Получить последний релиз можно [здесь](https://github.com/DesmondFox/GameOfLife/releases).
