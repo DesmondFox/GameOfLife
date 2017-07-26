@@ -36,6 +36,8 @@ private slots:
     // метод для таймера
     void slotTimerTimeout();
 
+    void slotSpeedTimerTimeout();
+
     void on_acStartStop_triggered();
 
     void on_acSettings_triggered();
@@ -48,7 +50,8 @@ private slots:
 
 private:
     Ui::MainWindow  *ui;
-    QLabel          *m_label;   // Для вывод текущей итерации
+    QLabel  *m_label;   // Для вывод текущей итерации
+    QLabel  *m_speedLabel; // Для вывода скорости вычисления
     Processing      *m_proc;
     void    setButtonsEnabled(bool enabled);
 
@@ -58,9 +61,17 @@ private:
     // Текст для статусбара
     QString statusBarText;
     void updateStatusBar(uint _gen, uint _alive);
+    // Текст для скорости
+    QString speedBarText;
+    void updateSpeedLabel(uint _iternum);
 
     // Таймер для вычислений поколений
     QTimer  m_mainTimer;
+    // Таймер для замера скорости вычисления
+    QTimer  m_speedTimer;
+
+    // Для вычисления скорости
+    volatile uint    _itnum;
 signals:
     // Сигнал для очистки поля от живых клеток
     void sigClear();

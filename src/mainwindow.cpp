@@ -11,6 +11,15 @@ void MainWindow::updateStatusBar(uint _gen, uint _alive)
     this->m_label->setText(_str);
 }
 
+void MainWindow::updateSpeedLabel(uint _iternum)
+{
+    // Обновление текста скорости
+
+    QString _str = QString(tr("Скорость вычисления: %1 п-ний/сек"))
+            .arg(QString::number(_iternum));
+    this->m_speedLabel->setText(_str);
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -20,18 +29,26 @@ MainWindow::MainWindow(QWidget *parent) :
     // Сначала все обнулить
     this->m_proc  = nullptr;
     this->currentIteration = 0;
+    this->_itnum = 0;
 
     // Выделим память под m_label и перекинем в статусбар
     this->m_label = new QLabel(statusBarText, ui->statusBar);
+    this->m_speedLabel = new QLabel(speedBarText, ui->statusBar);
     ui->statusBar->addWidget(m_label);
+    ui->statusBar->addWidget(m_speedLabel, 5);
+
     // Зададим текст для статусбара
     updateStatusBar(0, 0);
+    updateSpeedLabel(0);
 
     // Зададим интервал для таймера
     this->m_mainTimer.setInterval(100);
 
     // Зададим иконку для приложения
     this->setWindowIcon(QIcon(":/icons/icons/winicon.png"));
+
+    this->m_speedTimer.setInterval(1000);
+
 }
 
 MainWindow::~MainWindow()
@@ -52,6 +69,7 @@ void MainWindow::showEvent(QShowEvent *event)
     connect(m_proc, SIGNAL(sigGameOver()),          SLOT(slotEndOfGame()));
     connect(m_proc, SIGNAL(sigGenIteration(uint)),  SLOT(slotIteration(uint)));
     connect(&this->m_mainTimer, SIGNAL(timeout()),  SLOT(slotTimerTimeout()));
+    connect(&this->m_speedTimer, SIGNAL(timeout()), SLOT(slotSpeedTimerTimeout()));
 }
 
 void MainWindow::setButtonsEnabled(bool enabled)
@@ -78,6 +96,8 @@ void MainWindow::slotEndOfGame()
         qDebug() << "Notice:\t Timer: Stopped";
     }
 
+    this->updateSpeedLabel(0);
+
     QString _out;
     // Проверяем, было ли поле до этого пустое,
     // то есть проверяем на ненулевую генерацию
@@ -102,6 +122,14 @@ void MainWindow::slotTimerTimeout()
 {
     // Действия при включенном таймере
     this->m_proc->solveOneStep();
+    _itnum++;
+}
+
+void MainWindow::slotSpeedTimerTimeout()
+{
+
+    updateSpeedLabel(_itnum);
+    _itnum = 0;
 }
 
 void MainWindow::on_acStartStop_triggered()
@@ -118,6 +146,7 @@ void MainWindow::on_acStartStop_triggered()
         this->m_proc->setNeedToReadField(false);
 
         this->m_mainTimer.start();
+        this->m_speedTimer.start();
         qDebug() << "Notice:\t Timer: Started";
 
     }
@@ -126,6 +155,8 @@ void MainWindow::on_acStartStop_triggered()
         ui->acStartStop->setText(tr("Старт"));
         this->m_proc->setNeedToReadField(true);
         this->m_mainTimer.stop();
+        this->m_speedTimer.stop();
+        this->updateSpeedLabel(0);
 
         qDebug() << "Notice:\t Timer: Stopped";
     }
