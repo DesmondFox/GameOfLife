@@ -1,36 +1,25 @@
 Game Of Life
 =============================
 
-Свободная реализация одноименной игры по правилам математика [Дж. Конвея](https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D0%B9,_%D0%94%D0%B6%D0%BE%D0%BD_%D0%A5%D0%BE%D1%80%D1%82%D0%BE%D0%BD)
+The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+The "game" is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves, or, for advanced "players", by creating patterns with particular properties.
 
-Реализация разработана на C++ и использует графический каркас Qt.
+BUILDING
+=============================
+Requirements:
+OS: Windows / Mac OS X / Linux-based distributions
+Qt: Version 5.1 or later
 
-СОДЕРЖИМОЕ
-------------
-
-      src/                 исходный код проекта
-      LICENSE              лицензия проекта
-      README               этот файл
-
-КОМПИЛЯЦИЯ
------------
-
-*На компьютере обязательно должен быть установлен Qt5.*
-*Также необходимо наличие компилятора GCC или MinGW (Зависит от системы).*
-
-Перейдите в каталог с исходным кодом и выполните следующие команды:
+Compiling:
 ```
+git clone https://github.com/DesmondFox/GameOfLife.git
+cd GameOfLife
 qmake
-make
+make -j[number of cores]
 ```
 
-ПЛАНЫ
------------
-
-- [ ] Сохранение-загрузка
-- [ ] Сохранение состояний клеток при изменении размеров поля
-- [ ] Иконки в GUI
-
-**Если у вас возникли проблемы со сборкой, то вы можете найти уже готовые бинарники на странице репозитория!**
-
-Разработчики GameOfLife.
+TODO
+---------------
+- [ ] Saving and loading of states
+- [ ] Saving cell states when field has changed
+- [ ] Redesign
