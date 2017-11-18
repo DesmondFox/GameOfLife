@@ -8,6 +8,7 @@ BUILDING
 =============================
 Requirements:
 OS: Windows / Mac OS X / Linux-based distributions
+
 Qt: Version 5.1 or later
 
 Compiling:
