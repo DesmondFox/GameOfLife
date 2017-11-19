@@ -14,7 +14,7 @@ Qt: Version 5.1 or later
 Compiling:
 ```
 git clone https://github.com/DesmondFox/GameOfLife.git
-cd GameOfLife
+cd GameOfLife/src
 qmake
 make -j[number of cores]
 ```
