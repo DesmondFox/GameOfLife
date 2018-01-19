@@ -1,0 +1,12 @@
+sudo: required
+dist: trusty
+language: c++
+
+install:
+  - sudo apt-get install build-essential qt5-default git
+
+script:
+  - git clone https://github.com/DesmondFox/GameOfLife.git
+  - cd GameOfLife
+  - qmake
+  - make
