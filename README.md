@@ -1,4 +1,4 @@
-Game Of Life
+Game Of Life [![Build Status](https://travis-ci.org/DesmondFox/GameOfLife.svg?branch=master)](https://travis-ci.org/DesmondFox/GameOfLife)
 =============================
 
 The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
