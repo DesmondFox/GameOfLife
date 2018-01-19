@@ -1,6 +1,6 @@
 sudo: required
 dist: trusty
-language: c++11
+language: c++
 
 install:
   - sudo apt-get install build-essential qt5-default git
